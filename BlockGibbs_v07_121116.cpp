@@ -22,11 +22,9 @@ using namespace std;
 using namespace Eigen;
 using namespace boost;
 
-//MatrixXd betaUpdate(const Ref<const MatrixXd>& XtX,const Ref<const VectorXd>& gamma, double sigma_sq,  const Ref<const MatrixXd>& Y, int p);
+
 MatrixXd betaUpdate(const Ref<const MatrixXd>& X, const Ref<const VectorXd>& gamma, double sigma_sq, const Ref<const MatrixXd>& Y, int p, int K, int n, int B, MatrixXd &beta);
-//MatrixXd phiUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& tau_2, double w, double nu0);
 MatrixXd phiUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& tau_2, double w, double nu0, int K);
-//MatrixXd tauUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& phi, double a1, double a2);
 MatrixXd tauUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& phi, double a1, double a2, int K);
 double wUpdate(VectorXd& gammaVec);
 double sigmaUpdate(const Ref<const MatrixXd>& YVec, const Ref<const MatrixXd>& betaVec, double b1, double b2, const Ref<const MatrixXd>& X);
@@ -59,8 +57,10 @@ int main(){
     int B = floor(K/p);  // the number of blocks i.e. K = B*p
     double a1 = 3.0, a2 = 1.0, b1=1.0, b2=1.0;
     double nu0 = 0.0002, sigma_sq = 3.2, w=0.5;
+
     //    MatrixXd X(n,K);  // input X
     //    MatrixXd Y(n,1);  // input Y*
+    
     MatrixXd Y = MatrixXd::Random(n,1);  // Y* -> temporarily generated with random number for test
     MatrixXd X = MatrixXd::Random(n,K);  // X -> temporarily generated with random number for test
     
@@ -206,7 +206,7 @@ double beta_k_var(MatrixXd &beta_k, int K2){
 
 
 
-//MatrixXd betaUpdate(const Ref<const MatrixXd>& X,const Ref<const VectorXd>& gamma, double sigma_sq,  const Ref<const MatrixXd>& Y, int p){
+
 MatrixXd betaUpdate(const Ref<const MatrixXd>& X, const Ref<const VectorXd>& gamma, double sigma_sq, const Ref<const MatrixXd>& Y, int p, int K, int n, int B, MatrixXd &beta){
 //    int n = Y.rows();
 //    int K = gamma.size();  // the number of covariates
@@ -218,7 +218,6 @@ MatrixXd betaUpdate(const Ref<const MatrixXd>& X, const Ref<const VectorXd>& gam
     XtX = X.transpose()*X;
     MatrixXd XtX_j1(p,p); // X'(j)X(j)
     MatrixXd X_wo_j(n, K-p);  // X(-j)
-//    MatrixXd beta = MatrixXd::Random(K,1);  // beta from the previous iteration -> temporarily generated with random number for test
     MatrixXd beta_j(p,1);  // beta_(j)
     MatrixXd beta_wo_j(K-p,1);  // beta_(-j)
     MatrixXd Sigma_j_inv(p, p);  // Sigma_(j)_inverse
@@ -335,13 +334,11 @@ MatrixXd betaUpdate(const Ref<const MatrixXd>& X, const Ref<const VectorXd>& gam
     return beta;
 }
 
-//MatrixXd phiUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& tau_2, double w, double nu0){
 MatrixXd phiUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& tau_2, double w, double nu0, int K){
     //prior for tau^-2
     uniform_real_distribution<double> uniform(0.0001,1);
     random_device rd;
     std::mt19937 gen(rd());
-//    int K = beta.rows();
     double w1, w2;
     MatrixXd phi(K,1);
     for(int i=0; i<K; i++){
@@ -365,13 +362,11 @@ MatrixXd phiUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& t
     return phi;
 }
 
-//MatrixXd tauUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& phi, double a1, double a2){
 MatrixXd tauUpdate(const Ref<const MatrixXd>& beta, const Ref<const MatrixXd>& phi, double a1, double a2, int K){
     uniform_real_distribution<double> uniform(0.0001,1);
     random_device rd;
     std::mt19937 gen(rd());
     //prior for tau^-2
-//    int K = beta.rows();
     MatrixXd tau_2(K,1);
     for(int i=0; i<K; i++){
         gamma_distribution<> gamma(a1*1.0+(1/2), a2*1.0+pow(beta(i,0), 2)/(2*phi(i,0)));
