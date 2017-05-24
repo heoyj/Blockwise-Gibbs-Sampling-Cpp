@@ -1,9 +1,5 @@
 //
 //  main.cpp
-//  BIOS615_Final_project_YJHeo
-//
-//  Created by Youngjin Heo on 11/19/16.
-//  Copyright © 2016 Youngjin Heo. All rights reserved.
 //
 #include <Eigen/Dense>
 #include <iostream>
