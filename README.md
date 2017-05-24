@@ -28,8 +28,27 @@ The output variables are estimates of beta coefficient. Therefore, the parameter
 
 | Parameters | Last draw | Posterior Mean | 2.5th percentile | Convergence | 
 | :--------: | :-------: | :------------: | :--------------: | :---------: |
-| beta 0     |    0.3    | 0.2            | -0.2             | 0.6         |
-| beta 1     |           |                |                  |             |
+| beta 0     | 0.3       | 0.2            | -0.2             | 0.6         |
+| beta 1     | ...       | ...            | ...              | ...         |
+
+## 3. Examples
+
+These 5 files start from the variable names, and the first column of each dataset is the response variable. The other variables are all covariates.
+
+1. Diabetes.csv : 442 observations and 65 covariates
+2. Ozone.csv : 203 observations and 135 covariates
+3. Smartphone.csv : 7352 observations and 562 covariates 
+4. Housing.csv : 506 observations and 659 covariates
+5. Leukemia.csv : 72 observations and 3572 covariates
+
+The above 5 datasets are originally generated from the R package, spikeslab, and from UCI Machine Learning Repository.
+
+## 4. References
+
+1. Hemant Ishwaran and J. Sunil Rao. Spike and Slab Variable Selection: Frequentist and Bayesian Strategies. The Annals of Statistics, 2005.
+2. Naveen Naidu Narisetty and Xuming He. Bayesian Variable Selection with Shrinking and Diffusing Priors. The Annals of Statistics, 2014.
+
+
 
 
 
