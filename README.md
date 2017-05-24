@@ -8,7 +8,7 @@ To make a parsimonious model when initially having a large number of predictors,
 
 ## Usage
 
-Block-wise Gibbs sampling can be useful when there are a lot of covariates. This blockwise Gibbs sampling method is from a model, called spike and slab model (eq.(2)) [example](http://url.com/ “test title”)
+Block-wise Gibbs sampling can be useful when there are a lot of covariates. This blockwise Gibbs sampling method is from a model, called spike and slab model (eq.(2)) <a href="https://arxiv.org/pdf/math/0505633.pdf" target="_blank">test</a>
 
 
 
