@@ -1,6 +1,6 @@
 # C++ Project 
 
-## Block-wise Gibbs Sampling using 
+## Block-wise Gibbs Sampling using C++
 
 ## Abstract
 
